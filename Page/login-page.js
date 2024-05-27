@@ -10,26 +10,30 @@ class LoginPage{
         this.assertLogoutButton = page.locator('//*[@id="logout_sidebar_link"]');
     }
     
-    /*async enterUserName(username) {
-        //await this.userNameButton.waitFor({ state: 'visible' }); // Wait for the username input to be visible
-        await this.userNameButton.fill(username);
+    async fillName (userName) {
+       await this.userNameButton.fill(userName);
     }
-    
-    async enterPassword(password){
-        await this.passwordButton.fill(password);
-    }*/
 
-    async validLogin(userName,userPassword) {
-
-        await this.userNameButton.fill(userName);
+    async fillPassword (userPassword) {
         await this.passwordButton.fill(userPassword);
+     }
+
+    async doLogin(userName,userPassword) {
+
+        await this.fillName(userName);
+        await this.fillPassword(userPassword);
         await this.loginButton.click();
     }
 
     async assertLoginSuccess() {
-        await this.assertLogoutButton;
+        //await page.pause();
         await expect(this.assertLogoutButton).toHaveText('Logout');
     }
+    async assertInvalidLogin() {
+        await this.assertLogoutButton;
+        await page.textContent('Epic sadface: Username and password do not match any user in this service')
+    }
+
 }
 
 module.exports = LoginPage;

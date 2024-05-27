@@ -12,11 +12,32 @@ test.beforeEach(async ({page}) => {
     loginPage = new LoginPage(page);
 });
 
-test.only('test', async ({ page }) => {
+test.describe('Demo - login' , () => {
+    
 
-    //await loginPage.enterUserName('standard_user');
-    //await loginPage.enterPassword('secret_sauce');
-    await loginPage.validLogin(userName, userPassword);
-    await loginPage.assertLoginSuccess();
-    //await page.pause();
-  });
+    test('Valid Credential login', async ({ page }) => {
+
+        await loginPage.doLogin(userName, userPassword);
+        await loginPage.assertInvalidLogin();
+        
+        });
+
+        
+
+    test('Invalid password login', async ({ page }) => {
+
+        await loginPage.doLogin(userName, userName);
+        await loginPage.assertInvalidLogin();
+        
+        });
+
+        
+
+    test.only('Valid username login', async ({ page }) => {
+
+        await loginPage.doLogin(userName, userPassword);
+        await loginPage.assertLoginSuccess();
+        });
+    
+    //This is update comment
+});
