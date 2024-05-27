@@ -10,16 +10,19 @@ class LoginPage{
         this.assertLogoutButton = page.locator('//*[@id="logout_sidebar_link"]');
     }
     
-    async enterUserName(username) {
+    /*async enterUserName(username) {
         //await this.userNameButton.waitFor({ state: 'visible' }); // Wait for the username input to be visible
         await this.userNameButton.fill(username);
     }
     
     async enterPassword(password){
         await this.passwordButton.fill(password);
-    }
+    }*/
 
-    async clickLoginButton() {
+    async validLogin(userName,userPassword) {
+
+        await this.userNameButton.fill(userName);
+        await this.passwordButton.fill(userPassword);
         await this.loginButton.click();
     }
 
